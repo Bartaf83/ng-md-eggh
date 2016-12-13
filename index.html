@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="node_modules/angular-material/angular-material.css">
+    <style type="text/css">
+    html,
+    body {
+        font-family: 'Roboto', sans-serif;
+        font-size: 14;
+    }
+    
+    .avatar {
+        position: relative;
+        width: 128px;
+        height: 128px;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        display: inline-block;
+        overflow: hidden;
+        margin: 0px;
+        vertical-align: middle;
+        zoom: 0.70;
+        transform: translateZ(0);
+        -webkit-transform: scale(0.70);
+        -moz-transform: scale(0.70);
+    }
+    
+    md-list-item > button {
+        width: 100%;
+        text-align: left !important;
+    }
+    
+    #content {
+        padding-right: 40px;
+        padding-left: 40px;
+        padding-top: 25px;
+    }
+    
+    #content .md-button.share {
+        background-color: transparent;
+        border: none;
+        width: 48px;
+        height: 48px;
+        margin: 8px auto 16px 0;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+    }
+    
+    #content md-icon.avatar {
+        margin-top: 10px;
+    }
+    
+    #content .md-button.share > md-icon {
+        fill: black;
+        width: 36px;
+        height: 36px;
+    }
+    
+    [ng\:cloak],
+    [ng-cloak],
+    [data-ng-cloak],
+    [x-ng-cloak],
+    .ng-cloak,
+    .x-ng-cloak {
+        display: none !important;
+    }
+    
+    span.name {
+        font-weight: bold;
+        font-size: 1.1em;
+        padding-left: 5px;
+    }
+    
+    md-list-item > button {
+        width: 100%;
+        text-align: left !important;
+    }
+    
+    md-bottom-sheet md-icon {
+        margin-right: 20px;
+    }
+    
+    md-list-item > button {
+        width: 100%;
+        text-align: left !important;
+    }
+    
+    md-list-item > button > span {
+        font-weight: 700;
+    }
+    
+    md-toolbar h1 {
+        font-size: 1.250em;
+        font-weight: 400;
+        padding-left: 30px;
+    }
+    </style>
+</head>
+
+<body ng-app="MyApp" layout="column" ng-controller="UserController as ul" ng-cloak>
+    <md-toolbar style="height:30px;" layout="row" >
+        <md-button class="menu" aria-label="Toggle List" ng-click="ul.toggleList();" hide-gt-sm>
+            <md-icon md-svg-icon="menu"></md-icon>
+        </md-button>
+        <h1>   Ng starter app</h1>
+    </md-toolbar>
+    <div class="container" layout="row" flex>
+        <md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe>
+            <md-list ng-click="ul.toggleList();">
+                <md-list-item ng-repeat="u in ul.users">
+                    <md-button ng-click="ul.selectUser(u)">
+                        <md-icon md-svg-src="{{u.avatar}}" class="avatar"></md-icon>
+                        {{u.name}}
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+        <md-content id="content" flex>
+            <md-icon md-svg-src="{{ul.selected.avatar}}" class="avatar"></md-icon>
+            <h2>{{ul.selected.name}}</h2>
+            <p>{{ul.selected.content}}</p>
+            <md-button class="share" md-no-ink aria-label="Share" ng-click="ul.makeContact(ul.selected)">
+                <md-icon md-svg-icon="share"></md-icon>
+            </md-button>
+        </md-content>
+    </div>
+    <script src='node_modules/angular/angular.min.js'></script>
+    <script src='node_modules/angular-animate/angular-animate.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src='js/Users.js'></script>
+    <script src='js/UserService.js'></script>
+    <script src='js/UserController.js'></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script type="text/javascript">
+    angular.module('MyApp', ['ngMaterial', 'users'])
+        .config(function($mdIconProvider, $mdThemingProvider) {
+            $mdIconProvider.defaultIconSet('./svg/avatars.svg', 128)
+                .icon('share', './svg/share.svg', 24)
+                .icon("menu", "./svg/menu.svg", 24)
+                .icon("google_plus", "./svg/google_plus.svg", 512)
+                .icon("hangouts", "./svg/hangouts.svg", 512)
+                .icon("twitter", "./svg/twitter.svg", 512)
+                .icon("phone", "./svg/phone.svg", 512);
+
+            $mdThemingProvider.theme('default')
+                          .primaryPalette('lime')
+                          .accentPalette('orange');    
+
+
+        })
+    </script>
+</body>
+
+</html>
